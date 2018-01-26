@@ -9,7 +9,7 @@ $ export CGO_CFLAGS="-I`mecab-config --inc-dir`"
 $ go get github.com/bluele/mecab-golang
 </pre>
 
-# 環境構築
+# 実行コマンド
 <pre>
 go run mecab.go -i "input file path" -o "output filepath"
 </pre>
