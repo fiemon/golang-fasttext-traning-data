@@ -53,17 +53,13 @@ func createTrainData(m *mecab.MeCab) {
 		for {
 			features := strings.Split(node.Feature(), ",")
 			if features[0] == "名詞" {
-				if s != "" {
-					s = s + " "
-
-				}
-				s = s + node.Surface()
+				s = s + " " + node.Surface()
 			}
 			if node.Next() != nil {
 				break
 			}
 		}
-		s = l + record[1] + "," + s + "\n"
+		s = l + record[1] + " ," + s + "\n"
 		ouf.Write(([]byte)(s))
 	}
 }
