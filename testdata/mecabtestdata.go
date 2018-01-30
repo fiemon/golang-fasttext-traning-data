@@ -2,24 +2,18 @@ package main
 
 import (
 	"github.com/bluele/mecab-golang"
-	//"strings"
 	"flag"
 	"os"
 	"log"
 	"encoding/csv"
 	"io"
-	//"strings"
-	//"regexp"
-	//"strings"
 	"strings"
-	//"regexp"
 )
 
 var i  = flag.String("i", " string", "help message for \"i\" option")
 var o  = flag.String("o", " string", "help message for \"o\" option")
-var l = "__label__"
 
-func createTrainData(m *mecab.MeCab) {
+func createTestData(m *mecab.MeCab) {
 	tg, err := m.NewTagger()
 	if err != nil {
 		panic(err)
@@ -32,7 +26,7 @@ func createTrainData(m *mecab.MeCab) {
 	}
 	defer inf.Close()
 	reader := csv.NewReader(inf) //utf8
-	reader.Comma = ','
+	//reader.Comma = ','
 	reader.LazyQuotes = true
 	reader.FieldsPerRecord = -1
 
@@ -69,8 +63,7 @@ func createTrainData(m *mecab.MeCab) {
 				break
 			}
 		}
-		c := record[1]
-		s = l + c + s + "\n"
+		s = s + "\n"
 		ouf.Write(([]byte)(s))
 	}
 }
@@ -82,5 +75,5 @@ func main() {
 		panic(err)
 	}
 	defer m.Destroy()
-	createTrainData(m)
+	createTestData(m)
 }
